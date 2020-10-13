@@ -1,0 +1,89 @@
+.settings {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.players {
+  width: 80vw;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__text {
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  &__amount {
+    margin-bottom: 30px;
+    text-align: center;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .error-msg {
+    margin-top: 5px;
+  }
+}
+
+.game {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__player-number {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .card {
+    margin-bottom: 30px;
+    padding: 20px;
+    height: 300px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #000;
+
+    &.hidden {
+      background-color: #ddd;
+
+      & > * {
+        display: none;
+      }
+    }
+
+    &__role {
+      margin-bottom: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &__location {
+      text-transform: lowercase;
+      font-size: 16px;
+    }
+  }
+}
+
+.finish {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

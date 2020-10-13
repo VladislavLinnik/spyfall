@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/styles/reset';
+
+body {
+  min-height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+input, input::placeholder, textarea, button {
+  font-family: inherit;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input {
+  padding: 5px 10px;
+  display: inline-block;
+  border: none;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: #000;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all .3s;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  &:disabled {
+    background-color: #eee;
+    color: #000;
+  }
+}
+
+.error-msg {
+  display: inline-block;
+  color: red;
+  font-size: 12px;
+}
