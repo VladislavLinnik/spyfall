@@ -1,7 +1,6 @@
 <div class="settings"
-      *ngIf="!isStartScreenComplete && !isFinishedGame">
-  <form class="players"
-        #form="ngForm">
+      *ngIf="!isStartScreenComplete && timer === null">
+  <form class="players" #form="ngForm">
     <div class="players__text">Кол-во игроков</div>
     <div class="players__amount">
       <input type="number"
@@ -17,14 +16,45 @@
         </div>
       </div>
     </div>
+    <div class="players__text">Кол-во шпионов</div>
+    <div class="players__amount">
+      <input type="number"
+             placeholder="Введите количество шпионов"
+             minlength="3" required="true" min="1" #spyAmount="ngModel" name="spiesAmount"
+             [(ngModel)]="spiesNumber">
+      <div *ngIf="spyAmount.invalid && (spyAmount.dirty || spyAmount.touched)">
+        <div class="error-msg" *ngIf="spyAmount.errors.required">
+          Введите кол-во шпионов
+        </div>
+        <div class="error-msg" *ngIf="spyAmount.errors.minlength">
+          Минимальное количество {{spyAmount.errors.spiesNumber?.requiredLength}}
+        </div>
+      </div>
+    </div>
+    <div class="players__text">Секунд</div>
+    <div class="players__amount">
+      <input type="number"
+             placeholder="Введите количество секунд"
+             minlength="3" required="true" min="30" #secondsAmount="ngModel" name="secondsAmount"
+             [(ngModel)]="secondsNumber">
+      <div *ngIf="secondsAmount.invalid && (secondsAmount.dirty || secondsAmount.touched)">
+        <div class="error-msg" *ngIf="secondsAmount.errors.required">
+          Введите кол-во секунд
+        </div>
+        <div class="error-msg" *ngIf="secondsAmount.errors.minlength">
+          Минимальное количество {{secondsAmount.errors.spiesNumber?.requiredLength}}
+        </div>
+      </div>
+    </div>
     <button class="btn players__start-btn"
-            [disabled]="playersAmount.invalid"
-            (click)="start()">Начать</button>
+            [disabled]="playersAmount.invalid || spyAmount.invalid || secondsAmount.invalid"
+            (click)="showRoles()">Начать
+    </button>
   </form>
 </div>
 
 <div class="game"
-      *ngIf="isStartScreenComplete && !isFinishedGame">
+      *ngIf="isStartScreenComplete && timer === null">
   <h2 class="game__player-number">Игрок номер {{currentPlayerNumber}}</h2>
     <div class="card"
          [class.hidden]="isHiddenCard"
@@ -34,12 +64,17 @@
     </div>
     <button class="btn"
             (click)="nextPlayer()">
-      Следующий
+      {{currentPlayerNumber === playersNumber ? 'Играть' : 'Следующий'}}
     </button>
 </div>
 
 <div class="finish"
-      *ngIf="isFinishedGame">
-  Это Всииииоооо, <br>
-  перезагрузи страницу бро
+      *ngIf="timer && timer !== 0">
+  Осталось {{timer}} секунд
+</div>
+<div class="finish"
+      *ngIf="timer === 0">
+  Это всиооо, перезагрузи страницу
+  <button class="btn btn--reload"
+          (click)="refreshPage()">Перезагрузить</button>
 </div>

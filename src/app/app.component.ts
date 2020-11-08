@@ -8,15 +8,17 @@ import {locations} from './locations';
 })
 export class AppComponent {
   playersNumber = 3;
+  spiesNumber = 1;
+  secondsNumber = 30;
   isStartScreenComplete = false;
   isHiddenCard = true;
   location: string;
   currentPlayer = {};
   currentPlayerNumber = 1;
-  isFinishedGame = false;
+  timer = null;
   randomSpy = Math.floor(Math.random() * this.playersNumber) + 1;
 
-  start(): void {
+  showRoles(): void {
     this.isStartScreenComplete = true;
     const random = Math.floor(Math.random() * locations.length);
     this.location = locations[random];
@@ -25,13 +27,22 @@ export class AppComponent {
 
   nextPlayer(): void {
     this.isHiddenCard = true;
-    ++this.currentPlayerNumber;
 
-    if (this.currentPlayerNumber === this.playersNumber + 1) {
-      this.isFinishedGame = true;
+    if (this.currentPlayerNumber === this.playersNumber) {
+      const intervalId = setInterval(() => {
+        this.timer = this.secondsNumber--;
+        if (this.timer === 0) {
+          clearInterval(intervalId);
+        }
+      }, 1000);
     } else {
+      this.currentPlayerNumber++;
       this.generatePlayers();
     }
+  }
+
+  refreshPage(): void {
+    location.reload();
   }
 
   private generatePlayers(): void {
