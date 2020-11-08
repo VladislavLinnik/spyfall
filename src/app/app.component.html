@@ -16,8 +16,10 @@
         </div>
       </div>
     </div>
-    <div class="players__text">Кол-во шпионов</div>
-    <div class="players__amount">
+    <div class="players__text"
+          [style.display]="'none'">Кол-во шпионов</div>
+    <div class="players__amount"
+          [style.display]="'none'">
       <input type="number"
              placeholder="Введите количество шпионов"
              minlength="3" required="true" min="1" #spyAmount="ngModel" name="spiesAmount"
